@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { GetContactList } from '../../redux/Phonebook/phonebook-selectors';
 import { PhonebookActions } from "../../redux/Phonebook/phonebook-actions";
-
 import style from './ContactForm.module.css'
 
 
 
-function ContactForm({ onSubmit, contacts }) {
-
+function ContactForm() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
-
+    const contacts = useSelector(GetContactList);
+    const dispatch = useDispatch();
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -39,16 +39,11 @@ function ContactForm({ onSubmit, contacts }) {
         } else if (contacts.find((contact) => number === contact.number)) {
             alert(`${number} is already exists`);
         } else {
-            onSubmit(options);
+            dispatch(PhonebookActions.addContact(options));
         }
         setName('');
         setNumber('')
     };
-
-    useEffect(() => {
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-    }, [contacts])
-
 
     return (
         <form className={style.contactForm} onSubmit={handleSubmit}>
@@ -86,12 +81,4 @@ function ContactForm({ onSubmit, contacts }) {
 
 };
 
-const mapStateToProps = ({ contacts: { items } }) => ({
-    contacts: items
-})
-
-const mapDispatchToProps = dispatch => ({
-    onSubmit: options => dispatch(PhonebookActions.addContact(options))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default ContactForm;

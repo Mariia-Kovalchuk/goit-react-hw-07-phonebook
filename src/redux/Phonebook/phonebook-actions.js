@@ -1,26 +1,17 @@
-import { actionTypes } from './phonebook-types';
+import { createAction } from '@reduxjs/toolkit';
 import { v4 } from 'uuid';
 
 
-
-const addContact = ({ name, number }) => ({
-    type: actionTypes.ADD,
+const addContact = createAction('phonebook/add', ({ name, number }) => ({
     payload: {
         id: v4(),
         name,
         number,
     }
-});
+}));
 
-const deleteContact = id => ({
-    type: actionTypes.DELETE,
-    payload: id
-});
-
-const filterContacts = value => ({
-    type: actionTypes.FILTER,
-    payload: value
-})
+const deleteContact = createAction('phonebook/delete')
+const filterContacts = createAction('phonebook/filter')
 
 export const PhonebookActions = { addContact, deleteContact, filterContacts }
 

@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 
 import styles from './Phonebook.module.css';
 
-const Container = ({ children }) => <div className={styles.container}>{children}</div>;
+const Phonebook = ({ children }) => <div className={styles.container}>{children}</div>;
 
-Container.propTypes = {
+Phonebook.propTypes = {
   children: PropTypes.node,
 }
 
-export default Container;
+export default Phonebook;
