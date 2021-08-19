@@ -6,14 +6,19 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  max-width: 100%;
 }
 .listItem {
   display: inline-flex;
+  align-items: center;
   font-size: 20px;
   font-weight: 500;
 }
-.listItemText {
+.listItemName {
   margin-right: 15px;
+}
+.listItemNumber {
+  font-size: 15px;
 }
 
 .button {
@@ -30,5 +35,6 @@
 }
 .button:hover {
   /* background-color: rgb(245, 12, 12); */
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2),
+    0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }

@@ -1,24 +1,29 @@
 import style from './ContactList.module.css'
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GetFilteredContactList } from "../../redux/Phonebook/phonebook-selectors.js";
-import { PhonebookActions } from '../../redux/Phonebook/phonebook-actions'
+import { phonebookSelectors, phonebookOperations } from '../../redux/Phonebook';
+
 
 
 const ContactList = () => {
-    const contacts = useSelector(GetFilteredContactList);
+    const contacts = useSelector(phonebookSelectors.GetFilteredContactList);
     const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(phonebookOperations.fetchContacts())
+        }, [dispatch]);
+
 
     return (
         <ul className={style.contactsList}>
             {contacts.map(({ id, name, number }) => (
                 <li key={id} className={style.contactItem}>
                     <span className={style.listItem}>
-                        <p className={style.listItemText}>{name}</p>
-                        <p className={style.listItemText}>{number}</p>
+                        <p className={style.listItemName}>{name}</p>
+                        <p className={style.listItemNumber}>{number}</p>
                     </span>
                     <button
                         type="button"
-                        onClick={() => dispatch(PhonebookActions.deleteContact(id))}
+                        onClick={() => dispatch(phonebookOperations.deleteContact(id))}
                         className={style.button}
                     >
                         Delete

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { GetContactList } from '../../redux/Phonebook/phonebook-selectors';
-import { PhonebookActions } from "../../redux/Phonebook/phonebook-actions";
+import { phonebookSelectors, phonebookOperations } from '../../redux/Phonebook';
 import style from './ContactForm.module.css'
 
 
@@ -9,7 +8,7 @@ import style from './ContactForm.module.css'
 function ContactForm() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
-    const contacts = useSelector(GetContactList);
+    const contacts = useSelector(phonebookSelectors.GetContactList);
     const dispatch = useDispatch();
 
     const handleChange = e => {
@@ -39,7 +38,7 @@ function ContactForm() {
         } else if (contacts.find((contact) => number === contact.number)) {
             alert(`${number} is already exists`);
         } else {
-            dispatch(PhonebookActions.addContact(options));
+            dispatch(phonebookOperations.addContact(options));
         }
         setName('');
         setNumber('')
