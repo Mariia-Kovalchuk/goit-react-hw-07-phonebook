@@ -26,10 +26,17 @@ const loading = createReducer(false, {
 });
 
 const error = createReducer(null, {
+    [PhonebookActions.addContactRequest]: () => null,
+    [PhonebookActions.addContactSuccess]: () => null,
     [PhonebookActions.addContactError]: (_, { payload }) => payload,
+    [PhonebookActions.deleteContactRequest]: () => null,
+    [PhonebookActions.deleteContactSuccess]: () => null,
     [PhonebookActions.deleteContactError]: (_, { payload }) => payload,
-    [PhonebookActions.fetchContactError]:(_,{payload})=>payload
-})
+    [PhonebookActions.fetchContactRequest]: () => null,
+    [PhonebookActions.fetchContactSuccess]: () => null,
+    [PhonebookActions.fetchContactError]: (_, { payload }) => payload,
+    
+});
 
 export default combineReducers({
     items: itemsReducer,
